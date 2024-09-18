@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .lista{
+            background-color: blanchedalmond;
+        }
+        .novo-estilo{
+            color: red;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="titulo">Título</h1>
+    <ul>
+        <li class="lista">item-1</li>
+    </ul>
+    <p>Parágrafo-1</p>
+    <p>Parágrafo-2</p>
+    <button type="button" class="button">Click</button>
+    <script>
+        const titulo = document.querySelector('.titulo');
+        titulo.innerText = 'mudei o texto';
+
+        const estiloLista = document.querySelector('.lista');
+        estiloLista.style.backgroundColor = "blue";
+
+        const paragrafos = document.querySelectorAll('p');
+        paragrafos.forEach(p => {
+            p.classList.add('novo-estilo');
+        });
+
+        const botao = document.querySelector('.button');
+        botao.innerText = 'Clique aqui';
+    </script>
+    
+</body>
+</html>
