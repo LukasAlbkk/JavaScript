@@ -11,19 +11,33 @@
         <button type="button" id="botao">Curtir</button>   
     </section>
     <section class="list">
+        <button id="botaoLista">Mostrar quem curtiu</button>
         <h2>Pessoas que curtiram</h2>
         <p id="paragrafo"></p>
     </section>
     <script>
         const botao = document.getElementById('botao');
         const texto = document.getElementById('text');
+        let listaNome = [];
         botao.addEventListener('click', function (){
             const textValue = texto.value;
-            let listaNome = [];
-            listaNome.push(textValue);
+            let nomeJaAdicionado = false;
+            for (const nome of listaNome) {
+                if (nome === textValue) {
+                    nomeJaAdicionado = true;
+                    break;
+                }
+            }
+            
+            if (textValue && !nomeJaAdicionado) {
+                listaNome.push(textValue);
+            }     
+        });
+        const botao2 = document.getElementById('botaoLista')
+        botao2.addEventListener('click', function(){
             const novoParagrafo = document.createElement('p');
             novoParagrafo.textContent = listaNome.join(', ');
-            document.querySelector('.list').appendChild(novoParagrafo);      
+            document.querySelector('.list').appendChild(novoParagrafo); 
         });
 
     </script>
