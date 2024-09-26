@@ -15,6 +15,9 @@
         <h2>Pessoas que curtiram</h2>
         <p id="paragrafo"></p>
     </section>
+    <footer>
+        <button type="button" id="apagar">Apagar tudo</button>
+    </footer>
     <script>
         const botao = document.getElementById('botao');
         const texto = document.getElementById('text');
@@ -43,6 +46,12 @@
             let nomes = JSON.parse(jsonGet);
             novoParagrafo.textContent = nomes.join(', ');
             document.querySelector('.list').appendChild(novoParagrafo); 
+        });
+
+        const botao3 = document.getElementById('apagar');
+        botao3.addEventListener('click', function(){
+            localStorage.clear();
+            alert('O local storage foi limpo!');
         });
 
     </script>

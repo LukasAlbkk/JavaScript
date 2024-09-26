@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .completed{
+            color: red;
+            text-decoration: line-through;
+        }
+        .list{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <section id="events2">
+        <textarea id="text"></textarea>
+        <button type="button" id="butao">Adicionar</button>
+    </section>
+    <section class="list">
+        
+    </section>
+
+
+    <script>
+        const Tarefa = [];
+        const botao = document.getElementById('butao');
+        const texto = document.getElementById('text');
+        botao.addEventListener('click', function(){
+            const textValue = texto.value;
+            let descricaoExiste = false;
+            for (const desc of Tarefa){
+                if (desc === textValue) {
+                    descricaoExiste = true;
+                    break;
+                }
+            }
+            
+            if (textValue && !descricaoExiste) {
+                const novaTarefa = { Descricao: textValue, status: false };
+                Tarefa.push(novaTarefa);  
+                
+                const novoCheckbox = document.createElement('input'); 
+                novoCheckbox.type = 'checkbox';
+                novoCheckbox.name = textValue;
+                novoCheckbox.value = textValue;
+
+                novoCheckbox.addEventListener('change', function() {
+                    novaTarefa.status = this.checked; 
+                    if (this.checked) {
+                        label.classList.add('completed'); 
+                    } else {
+                        label.classList.remove('completed'); 
+                    }
+                });
+
+                const label = document.createElement('label'); 
+                label.textContent = textValue; 
+                label.appendChild(novoCheckbox); 
+
+                document.querySelector('.list').appendChild(label); 
+                texto.value = ''; 
+            }
+        });
+
+    </script>
+</body>
+</html>
