@@ -13,7 +13,9 @@
         .list{
             display: flex;
             flex-direction: column;
+            gap: 30px;
         }
+    
     </style>
 </head>
 <body>
@@ -21,9 +23,11 @@
         <textarea id="text"></textarea>
         <button type="button" id="butao">Adicionar</button>
     </section>
-    <section class="list">
-        
-    </section>
+    <div class="div">
+        <section class="list">
+            
+        </section>
+    </div>
 
 
     <script>
@@ -51,19 +55,41 @@
 
                 novoCheckbox.addEventListener('change', function() {
                     novaTarefa.status = this.checked; 
+                    let buscar = JSON.parse(localStorage.getItem('descricoes'));
+                    let tarefa = buscar.find(t => t.Descricao === textValue);
+
+                    if (tarefa) {
+                        tarefa.status = this.checked;
+                    }
+                    localStorage.setItem('descricoes', JSON.stringify(buscar));
                     if (this.checked) {
                         label.classList.add('completed'); 
                     } else {
                         label.classList.remove('completed'); 
                     }
                 });
+                let jsonSet = JSON.stringify(Tarefa);
+                localStorage.setItem('descricoes', jsonSet);
 
                 const label = document.createElement('label'); 
                 label.textContent = textValue; 
                 label.appendChild(novoCheckbox); 
-
                 document.querySelector('.list').appendChild(label); 
                 texto.value = ''; 
+
+                const excluir = document.createElement('button'); 
+                excluir.textContent = 'Excluir'; 
+                document.querySelector('.list').appendChild(excluir); 
+
+                excluir.addEventListener('click', function() {
+                const indice = Tarefa.findIndex(t => t.Descricao === textValue);
+                if (indice > -1) {
+                    Tarefa.splice(indice, 1);
+                    localStorage.setItem('descricoes', JSON.stringify(Tarefa));
+                }
+                label.remove(); 
+                excluir.remove();  
+            });
             }
         });
 
